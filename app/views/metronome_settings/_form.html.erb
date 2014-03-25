@@ -1,0 +1,80 @@
+<% resources = [@user,@piece,@metronome_setting]%>
+<%= form_for(resources) do |f| %>
+    <% if @metronome_setting.errors.any? %>
+        <div id="form_error">
+          <h2><%= pluralize(@metronome_setting.errors.count, "error") %> prohibited this metronome-setting from being saved:</h2>
+          <ul>
+            <% @metronome_setting.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label "Classic ticks per minute" %><br />
+      <%= f.number_field :classic_ticks_per_minute %>
+    </div>
+    <div class="field">
+      <%= f.label "Classic ticks per beat" %><br />
+      <%= f.number_field :classic_ticks_per_beat %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.label "Background tone?" %>
+      <%= f.check_box :is_background_tick, id: "background" %>
+    </div>
+    <div class="field">
+      <%= f.label "Background tone on all ticks?" %>
+      <%= f.check_box :is_background_on_all_ticks, id: "background_on_all" %>
+    </div>
+    <div class="field">
+      <%= f.label "Classic tone?" %>
+      <%= f.check_box :is_classic_tick, id: "classic" %>
+    </div>
+    <div class="field">
+      <%= f.label "Mute right & left for classic?" %>
+      <%= f.check_box :is_mute_right_and_left_for_classic, id: "mute_for_classic" %>
+    </div>
+    <div class="field">
+      <%= f.label "Right hand tone?" %>
+      <%= f.check_box :is_right_hand_tick %>
+    </div>
+    <div class="field">
+      <%= f.label "Left hand tone?" %>
+      <%= f.check_box :is_left_hand_tick %>
+    </div>
+    <div class="field">
+      <%= f.label "Right/Left in stereo?" %>
+      <%= f.check_box :is_stereo_for_right_left %>
+    </div>
+    <div class="field">
+      <%= f.label "Auto-log usage?" %>
+      <%= f.check_box :is_log_usage, id: "log" %>
+    </div>
+    <div class="field">
+      <%= f.label "Log settings?" %>
+      <%= f.check_box :is_log_settings_if_log_usage, id: "log_settings" %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.label "Loop?" %>
+      <%= f.check_box :is_loop %>
+    </div>
+    <div class="field">
+      <%= f.label "Use Entire Piece?" %>
+      <%= f.check_box :is_use_entire, id: "use_entire" %>
+    </div>
+    <br />
+    <% @metronome_setting.view_morphing_attributes.each_pair do |key,value| %>
+        <div>
+            <%= f.label key, class: "index_item" %><br />
+            <%= f.number_field value, class: "index_field"%>
+        </div>
+    <% end %>
+
+    <div class="actions">
+    <br />
+    <%= f.submit %>
+    </div>
+<% end %>

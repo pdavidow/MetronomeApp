@@ -1,0 +1,6 @@
+<button type="button" id="toggle" class="mirror"> toggle views</button>
+<br />
+<br />
+<div id="metronome1" />
+<br />
+<div id="metronome2" class="mirror" />

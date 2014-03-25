@@ -1,0 +1,30 @@
+<% resources = [@user,@piece]%>
+<%= form_for(resources) do |f| %>
+    <% if @piece.errors.any? %>
+        <div id="form_error">
+          <h2><%= pluralize(@piece.errors.count, "error") %> prohibited this piece from being saved:</h2>
+
+          <ul>
+            <% @piece.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :composer %><br />
+      <%= f.text_field :composer %>
+    </div>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :catalog_reference %><br />
+      <%= f.text_field :catalog_reference %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

@@ -1,0 +1,12 @@
+<h1>New log-entry (auto time-stamped)</h1>
+<%= link_to @piece, user_piece_measures_path(@user, @piece), id: "piece" %>
+<br />
+<br />
+<br />
+<%= render 'form' %>
+<br />
+<br />
+<%= link_to 'Log', user_piece_log_entries_path(@user,@piece) %>  |
+<%= link_to 'Metronome', metronome_user_piece_path(@user, @piece), id: "metronome" %> |
+<%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, @piece) %> |
+<%= link_to 'Pieces', user_pieces_path(@user) %>

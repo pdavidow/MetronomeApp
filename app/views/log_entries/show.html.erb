@@ -1,0 +1,29 @@
+<p>
+  <b>LOG-ENTRY</b>
+</p>
+<%= link_to @piece, user_piece_measures_path(@user, @piece), id: "piece" %>
+<br />
+<br />
+<p>
+  <b>Time-stamp:</b>
+  <%= @log_entry.time %>
+</p>
+<p>
+<textarea name = "Contents" rows = "21" cols = "80" disabled = "disabled">
+  <%= @log_entry.contents %>
+</textarea>
+</p>
+
+<%= link_to 'Log', user_piece_log_entries_path(@user,@piece) %>  |
+<%= link_to 'Metronome', metronome_user_piece_path(@user, @piece), id: "metronome" %> |
+<%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, @piece) %> |
+<%= link_to 'Pieces', user_pieces_path(@user) %>
+
+
+
+
+
+
+
+
+

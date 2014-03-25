@@ -1,0 +1,35 @@
+<h1>Log entries</h1>
+<%= link_to @piece, user_piece_measures_path(@user, @piece), id: "piece" %>
+<br />
+<br />
+<table>
+  <% if not @log_entries.empty? %>
+      <thead>
+      <tr>
+        <td></td>
+        <td>Time-stamp</td>
+        <td>Contents</td>
+      </tr>
+      </thead>
+  <% end %>
+  <% @log_entries.each do |log_entry| %>
+      <tr>
+        <td><%= '#' + log_entry.display_index.to_s %></td>
+        <td><%= log_entry.time %></td>
+        <td><%= log_entry.contents.truncate(40) %></td>
+        <td><%= link_to 'Show', user_piece_log_entry_path(@user, @piece, log_entry) %></td>
+        <td><%= link_to 'Destroy', user_piece_log_entry_path(@user, @piece, log_entry), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+<%= link_to 'Add Entry #' + (@log_entries.size + 1).to_s, new_user_piece_log_entry_path(@user, @piece) %>
+<% if not @log_entries.empty? %>
+    <%= link_to 'Destroy all', destroy_all_user_piece_log_entries_path(@user, @piece), data: { confirm: 'Are you sure?'} %>
+<% end %>
+<br />
+<br />
+<%= link_to 'Metronome', metronome_user_piece_path(@user, @piece), id: "metronome" %> |
+<%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, @piece) %> |
+<%= link_to 'Pieces', user_pieces_path(@user) %>

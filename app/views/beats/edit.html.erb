@@ -1,0 +1,10 @@
+<h1>Editing <%= @beat.display_location_description %></h1>
+<%= link_to @piece, user_piece_measures_path(@user, @piece), id: "piece" %>
+<br />
+<br />
+<%= render 'form' %>
+<br />
+<br />
+<%= link_to 'Back', user_piece_measure_beats_path(@user, @piece, @measure) %>
+
+

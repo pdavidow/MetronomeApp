@@ -1,0 +1,22 @@
+<h1>Measures</h1>
+<p id="piece"><%= @piece%></p>
+<table>
+  <% @measures.each do |measure| %>
+      <tr>
+         <td><%= '#' + measure.display_measure_index.to_s %></td>
+         <td><%= measure.to_s %></td>
+         <td><%= link_to 'Beats', user_piece_measure_beats_path(@user, @piece, measure) %></td>
+         <td><%= link_to 'Destroy', user_piece_measure_path(@user, @piece, measure), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+<%= link_to 'Add Measure #' + (@measures.size + 1).to_s, add_user_piece_measures_path(@user, @piece) %>
+
+<br />
+<br />
+<%= link_to 'Metronome', metronome_user_piece_path(@user, @piece), id: "metronome" %> |
+<%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, @piece) %> |
+<%= link_to 'Log', user_piece_log_entries_path(@user,@piece) %> |
+<%= link_to 'Pieces', user_pieces_path(@user) %>

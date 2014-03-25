@@ -1,0 +1,21 @@
+<h1>Pieces</h1>
+
+<table>
+  <% @pieces.each do |piece| %>
+      <tr>
+        <td><%= piece %></td>
+        <td><%= link_to 'Measures', user_piece_measures_path(@user, piece) %></td>
+        <td><%= link_to 'Metronome', metronome_user_piece_path(@user, piece), id: "metronome" %></td>
+        <td><%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, piece) %></td>
+        <td><%= link_to 'Log', user_piece_log_entries_path(@user, piece) %></td>
+        <td><%= link_to 'Edit', edit_user_piece_path(@user, piece) %></td>
+        <td><%= link_to 'Destroy', user_piece_path(@user, piece), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+<%= link_to 'Add New Piece', new_user_piece_path(@user) %> |
+<%= link_to "Import from Library", index_library_user_pieces_path(@user) %>
+
+

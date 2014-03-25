@@ -1,0 +1,10 @@
+<button type="button" id="start">Start</button>
+<button type="button" id="stop">Stop</button>
+<div id="log_entry"></div>
+<br/>
+<br/>
+<div id="ongoing_status">
+    <div id="current_beat"></div>
+    <div id="loop"></div>
+</div>
+

@@ -1,0 +1,28 @@
+<% resources = [@user, @piece, @measure, @beat]%>
+<%= form_for(resources) do |f| %>
+    <% if @beat.errors.any? %>
+        <div id="form_error">
+          <h2><%= pluralize(@piece.errors.count, "error") %> prohibited this beat from being saved:</h2>
+
+          <ul>
+            <% @beat.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :'Right-hand amount of evenly-spaced notes' %><br />
+      <%= f.number_field :right_hand %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.label 'Left-hand amount of evenly-spaced notes' %><br />
+      <%= f.number_field :left_hand %>
+    </div>
+    <br />
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

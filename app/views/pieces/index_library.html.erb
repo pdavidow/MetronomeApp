@@ -1,0 +1,25 @@
+<% if (not @import.nil?) and (@import.errors.any?) %>
+    <div id="form_error">
+      <h2><%= pluralize(@import.errors.count, "error") %> prohibited import:</h2>
+      <ul>
+        <% @import.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<h1>Library Pieces</h1>
+
+<table>
+  <% @library_pieces.each do |piece| %>
+      <tr>
+        <td><%= piece.to_s %></td>
+        <td><%= link_to 'Import', import_from_library_user_piece_path(@user, piece) %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'Pieces', user_pieces_path(@user) %>

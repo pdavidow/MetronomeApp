@@ -1,0 +1,6 @@
+<p>
+<span id="log_entry_blurb">
+logged: <%= @lines.first() %>
+<%= " ..." if @lines.length > 1 %>
+</span>
+</p>

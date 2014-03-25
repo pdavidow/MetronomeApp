@@ -1,0 +1,25 @@
+<h1>Beats for measure <%= @measure.display_measure_index %></h1>
+<%= link_to @piece, user_piece_measures_path(@user, @piece), id: "piece" %>
+<br />
+<br />
+<p>Any measure can have an arbitrary number of beats.</p>
+<br />
+<table>
+  <% @beats.each do |beat| %>
+      <tr>
+        <td><%= '#' + beat.display_beat_index.to_s %></td>
+        <td><%= beat.to_s %></td>
+        <td><%= link_to 'Edit', edit_user_piece_measure_beat_path(@user, @piece, @measure, beat) %></td>
+        <td><%= link_to 'Destroy', user_piece_measure_beat_path(@user, @piece, @measure, beat), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+<%= link_to 'Add Beat #' + (@beats.size + 1).to_s, new_user_piece_measure_beat_path(@user, @piece, @measure) %>
+<br />
+<br />
+<%= link_to 'Metronome', metronome_user_piece_path(@user, @piece), id: "metronome" %> |
+<%= link_to 'Metronome-Setting', edit_sole_user_piece_metronome_settings_path(@user, @piece) %> |
+<%= link_to 'Log', user_piece_log_entries_path(@user,@piece) %> |
+<%= link_to 'Pieces', user_pieces_path(@user) %>
