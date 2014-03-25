@@ -1,4 +1,6 @@
 class MetronomeSetting < Object
+  # For definition of domain terminology, see app/views/metronome_settings/edit.html.erb
+
   include Mongoid::Document
   include MetronomicExceptions
 
@@ -29,23 +31,22 @@ class MetronomeSetting < Object
 
   attr_reader :piece
 
+  DISPLAY_INDEX_OFFSET = 1
+
   def view_morphing_attributes
-    {begin_beat_index: :display_begin_beat_index,
+    # These attributes are offset by DISPLAY_INDEX_OFFSET in the user's view of the domain model
+    {begin_beat_index:    :display_begin_beat_index,
      begin_measure_index: :display_begin_measure_index,
-     end_beat_index: :display_end_beat_index,
-     end_measure_index: :display_end_measure_index}
+     end_beat_index:      :display_end_beat_index,
+     end_measure_index:   :display_end_measure_index}
   end
 
   def self.is_display_adapt
     @is_display_adapt ||= {}
   end
 
-  def display_index_offset
-    1
-  end
-
   def index_base
-    self.is_display_adapt ? self.display_index_offset : 0
+    self.is_display_adapt ? DISPLAY_INDEX_OFFSET : 0
   end
 
   def is_display_adapt
@@ -62,21 +63,15 @@ class MetronomeSetting < Object
     self.class.is_display_adapt.delete(self._id)
   end
 
+  def params_without_view_morphing_attributes(params)
+    params_without = params.clone
+    self.view_morphing_attributes.each_value{|v| params_without.delete(v)}
+    params_without
+  end
+
   def update_attributes_from_display(params)
+    self.assign_attributes(self.params_without_view_morphing_attributes(params))
     self.display_adapt # only for the sake of generating appropriate validation errors
-    self.classic_ticks_per_minute = params['classic_ticks_per_minute'].to_i
-    self.classic_ticks_per_beat = params['classic_ticks_per_beat'].to_i
-    self.is_background_on_all_ticks = ((params['is_background_on_all_ticks'].to_i) == 0) ?  false : true
-    self.is_background_tick = ((params['is_background_tick'].to_i) == 0) ?  false : true
-    self.is_classic_tick = ((params['is_classic_tick'].to_i) == 0) ?  false : true
-    self.is_mute_right_and_left_for_classic = ((params['is_mute_right_and_left_for_classic'].to_i) == 0) ?  false : true
-    self.is_right_hand_tick = ((params['is_right_hand_tick'].to_i) == 0) ?  false : true
-    self.is_left_hand_tick = ((params['is_left_hand_tick'].to_i) == 0) ?  false : true
-    self.is_use_entire = ((params['is_use_entire'].to_i) == 0) ?  false : true
-    self.is_stereo_for_right_left = ((params['is_stereo_for_right_left'].to_i) == 0) ?  false : true
-    self.is_loop = ((params['is_loop'].to_i) == 0) ?  false : true
-    self.is_log_usage = ((params['is_log_usage'].to_i) == 0) ?  false : true
-    self.is_log_settings_if_log_usage = ((params['is_log_settings_if_log_usage'].to_i) == 0) ?  false : true
     self.set_view_morphing_attributes_from_display(params) unless self.is_use_entire
     result = self.save
     self.display_unadapt
@@ -87,24 +82,24 @@ class MetronomeSetting < Object
     self.view_morphing_attributes.each_pair do |key,value|
       setter = (key.to_s + '=').to_sym
       display_datum = params[value.to_s].to_i
-      self.send(setter, (display_datum - self.display_index_offset))
+      self.send(setter, (display_datum - DISPLAY_INDEX_OFFSET))
     end
   end
 
   def display_begin_measure_index
-    self.begin_measure_index + self.display_index_offset
+    self.begin_measure_index + DISPLAY_INDEX_OFFSET
   end
 
   def display_begin_beat_index
-    self.begin_beat_index + self.display_index_offset
+    self.begin_beat_index + DISPLAY_INDEX_OFFSET
   end
 
   def display_end_measure_index
-    self.end_measure_index + self.display_index_offset
+    self.end_measure_index + DISPLAY_INDEX_OFFSET
   end
 
   def display_end_beat_index
-    self.end_beat_index + self.display_index_offset
+    self.end_beat_index + DISPLAY_INDEX_OFFSET
   end
 
   def interested_in_beat?(beat)
@@ -193,25 +188,25 @@ class MetronomeSetting < Object
 
   def log_output
     result =
-    "Classic ticks per minute: " + self.classic_ticks_per_minute.to_s + "\n" +
-    "Classic ticks per beat: " + self.classic_ticks_per_beat.to_s + "\n" +
-    "\n" +
-    "Background tone?: " + self.is_background_tick.to_s + "\n" +
-    "Background tone on all ticks?: " + self.is_background_on_all_ticks.to_s + "\n" +
-    "Classic tone?: " + self.is_classic_tick.to_s + "\n" +
-    "Mute right & left for classic?: " + self.is_mute_right_and_left_for_classic.to_s + "\n" +
-    "Right hand tone?: " + self.is_right_hand_tick.to_s + "\n" +
-    "Left hand tone?: " + self.is_left_hand_tick.to_s + "\n" +
-    "Right/Left in stereo?: " + self.is_stereo_for_right_left.to_s + "\n" +
-    "Loop?: " + self.is_loop.to_s + "\n" +
-    "Use Entire Piece?: " + self.is_use_entire.to_s + "\n"
+        "Classic ticks per minute: " + self.classic_ticks_per_minute.to_s + "\n" +
+            "Classic ticks per beat: " + self.classic_ticks_per_beat.to_s + "\n" +
+            "\n" +
+            "Background tone?: " + self.is_background_tick.to_s + "\n" +
+            "Background tone on all ticks?: " + self.is_background_on_all_ticks.to_s + "\n" +
+            "Classic tone?: " + self.is_classic_tick.to_s + "\n" +
+            "Mute right & left for classic?: " + self.is_mute_right_and_left_for_classic.to_s + "\n" +
+            "Right hand tone?: " + self.is_right_hand_tick.to_s + "\n" +
+            "Left hand tone?: " + self.is_left_hand_tick.to_s + "\n" +
+            "Right/Left in stereo?: " + self.is_stereo_for_right_left.to_s + "\n" +
+            "Loop?: " + self.is_loop.to_s + "\n" +
+            "Use Entire Piece?: " + self.is_use_entire.to_s + "\n"
 
     if not self.is_use_entire then
       result += "\n" +
-      "Begin beat index: " + self.display_begin_beat_index.to_s + "\n" +
-      "Begin measure index: " + self.display_begin_measure_index.to_s + "\n" +
-      "End beat index: " + self.display_end_beat_index.to_s + "\n" +
-      "End measure index: " + self.display_end_measure_index.to_s + "\n"
+          "Begin beat index: " + self.display_begin_beat_index.to_s + "\n" +
+          "Begin measure index: " + self.display_begin_measure_index.to_s + "\n" +
+          "End beat index: " + self.display_end_beat_index.to_s + "\n" +
+          "End measure index: " + self.display_end_measure_index.to_s + "\n"
     end
     result
   end

@@ -36,7 +36,8 @@ class Beat < Object
   end
 
   def tick_amount
-    @tick_amount ||= (Polyrhythm.new(self.rh, self.lh).lowest_common_multiple)
+    #@tick_amount ||= (Polyrhythm.new(self.rh, self.lh).lowest_common_multiple)
+    @tick_amount ||= (self.rh).lcm(self.lh)
   end
 
   def location_description
