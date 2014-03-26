@@ -13,7 +13,7 @@ class Measure < Object
   end
 
   def display_measure_index
-    self.measure_index + 1
+    self.measure_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def metronome

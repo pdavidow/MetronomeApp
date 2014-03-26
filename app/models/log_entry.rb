@@ -12,6 +12,6 @@ class LogEntry < Object
   end
 
   def display_index
-    self.index + 1
+    self.index + User::DISPLAY_INDEX_OFFSET
   end
 end

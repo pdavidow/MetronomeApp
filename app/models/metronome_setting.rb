@@ -31,10 +31,8 @@ class MetronomeSetting < Object
 
   attr_reader :piece
 
-  DISPLAY_INDEX_OFFSET = 1
-
   def view_morphing_attributes
-    # These attributes are offset by DISPLAY_INDEX_OFFSET in the user's view of the domain model
+    # These attributes are offset by User::DISPLAY_INDEX_OFFSET
     {begin_beat_index:    :display_begin_beat_index,
      begin_measure_index: :display_begin_measure_index,
      end_beat_index:      :display_end_beat_index,
@@ -46,7 +44,7 @@ class MetronomeSetting < Object
   end
 
   def index_base
-    self.is_display_adapt ? DISPLAY_INDEX_OFFSET : 0
+    self.is_display_adapt ? User::DISPLAY_INDEX_OFFSET : 0
   end
 
   def is_display_adapt
@@ -82,24 +80,24 @@ class MetronomeSetting < Object
     self.view_morphing_attributes.each_pair do |key,value|
       setter = (key.to_s + '=').to_sym
       display_datum = params[value.to_s].to_i
-      self.send(setter, (display_datum - DISPLAY_INDEX_OFFSET))
+      self.send(setter, (display_datum - User::DISPLAY_INDEX_OFFSET))
     end
   end
 
   def display_begin_measure_index
-    self.begin_measure_index + DISPLAY_INDEX_OFFSET
+    self.begin_measure_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def display_begin_beat_index
-    self.begin_beat_index + DISPLAY_INDEX_OFFSET
+    self.begin_beat_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def display_end_measure_index
-    self.end_measure_index + DISPLAY_INDEX_OFFSET
+    self.end_measure_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def display_end_beat_index
-    self.end_beat_index + DISPLAY_INDEX_OFFSET
+    self.end_beat_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def interested_in_beat?(beat)

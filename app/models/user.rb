@@ -3,6 +3,8 @@ class User
 
   has_many :pieces
 
+  DISPLAY_INDEX_OFFSET = 1 # User expects first item in a list to be numbered one, not zero
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

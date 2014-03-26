@@ -36,7 +36,6 @@ class Beat < Object
   end
 
   def tick_amount
-    #@tick_amount ||= (Polyrhythm.new(self.rh, self.lh).lowest_common_multiple)
     @tick_amount ||= (self.rh).lcm(self.lh)
   end
 
@@ -61,7 +60,7 @@ class Beat < Object
   end
 
   def display_beat_index
-    self.beat_index + 1
+    self.beat_index + User::DISPLAY_INDEX_OFFSET
   end
 
   def right_hand_indicies
