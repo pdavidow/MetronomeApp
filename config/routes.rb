@@ -8,7 +8,6 @@ MetronomeRailsMongo::Application.routes.draw do
       member do
         get 'import_from_library'
         get 'metronome'
-        get 'metronome_start'
       end
       collection do
         get 'index_library'
