@@ -43,7 +43,6 @@ class PolyrhythmicMetronome < Object
   end
 
   def beats_of_interest
-    return [] if self.beats.empty?
     self.beats.select{|each| self.setting.interested_in_beat?(each)}
   end
 
@@ -52,7 +51,6 @@ class PolyrhythmicMetronome < Object
   end
 
   def validated_beats_of_interest
-    return [] if self.beats.empty?
     self.validate
     self.beats_of_interest
   end
