@@ -87,8 +87,8 @@ test:
         retry_interval: 0
 production:
   sessions:
-    default:
-      uri: <%= ENV['MONGODB_URI']  %>
     options:
       skip_version_check: true
       safe: true
+      uri: <%= ENV['MONGODB_URI']  %>
+      database:
