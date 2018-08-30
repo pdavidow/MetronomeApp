@@ -1,27 +1,10 @@
-# development:
-# # Configure available database sessions. (required)
-#   sessions:
-#     default:
-#       uri: 'mongodb://root:root123@ds133642.mlab.com:33642/metronome_development'
-#       options:
-#         consistency: :strong
-# #         max_retries: 30
-# #         retry_interval: 1
-# #         timeout: 15
-# development:
-#     clients:
-#         default:
-#             uri: mongodb://root:root123@ds133642.mlab.com:33642/metronome_development
-#         options:
-#             skip_version_check: true
-#         safe: true
 development:
-    sessions:
-      default:
-        uri: mongodb://root:root123@ds133642.mlab.com:33642/metronome_development
-        options:
-          skip_version_check: true
-          safe: true
+  sessions:
+    default:
+      uri: mongodb://root:root123@ds133642.mlab.com:33642/metronome_development
+      options:
+        skip_version_check: true
+        safe: true
 # development:
 #   sessions:
 #     default:
