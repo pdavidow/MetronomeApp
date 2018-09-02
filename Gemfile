@@ -26,9 +26,16 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'gon', '3.0.5'
 gem 'rails_12factor', group: :production   ### HEROKU
-
+gem 'unicorn'
 group :development, :test do
   gem 'jasminerice'
+
+    gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+   gem 'capistrano-rails',   require: false
+   gem 'capistrano-bundler', require: false
+   gem 'capistrano-unicorn-nginx'
+   gem 'sshkit-sudo'
 end
 
 gem 'rails-backbone'
@@ -47,5 +54,4 @@ gem 'rails-backbone'
 
 #####################################################
 ### uncomment for Heroku:
-gem 'unicorn'  ### HEROKU
-ruby '2.0.0'   ### HEROKU
+ruby '2.0.0'
