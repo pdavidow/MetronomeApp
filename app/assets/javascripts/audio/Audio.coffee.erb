@@ -10,28 +10,28 @@ class window.Audio
       alert('Web Audio API is not supported in this browser')
 
     tones = [
-      '/assets/sounds/tone_700hz.mp3',
-      '/assets/sounds/tone_800hz.mp3',
-      '/assets/sounds/tone_850hz.mp3',
-      '/assets/sounds/tone_900hz.mp3',
-      '/assets/sounds/tone_950hz.mp3',
-      '/assets/sounds/tone_1000hz.mp3',
-      '/assets/sounds/tone_1050hz.mp3',
-      '/assets/sounds/tone_1100hz.mp3',
-      '/assets/sounds/tone_1150hz.mp3',
-      '/assets/sounds/tone_1200hz.mp3',
-      '/assets/sounds/tone_1250hz.mp3',
-      '/assets/sounds/tone_1300hz.mp3',
-      '/assets/sounds/tone_1350hz.mp3',
-      '/assets/sounds/tone_1400hz.mp3',
-      '/assets/sounds/tone_1450hz.mp3',
-      '/assets/sounds/tone_1500hz.mp3',
-      '/assets/sounds/tone_2000hz.mp3',
-      '/assets/sounds/tone_2500hz.mp3',
-      '/assets/sounds/tone_3000hz.mp3',
-      '/assets/sounds/tone_3500hz.mp3',
-      '/assets/sounds/tone_4000hz.mp3',
-      '/assets/sounds/tone_Silence_1ms.wav']
+      "<%= asset_url ('tone_700hz.mp3') %>",
+      "<%= asset_url ('tone_800hz.mp3') %>",
+      "<%= asset_url ('tone_850hz.mp3') %>",
+      "<%= asset_url ('tone_900hz.mp3') %>",
+      "<%= asset_url ('tone_950hz.mp3') %>",
+      "<%= asset_url ('tone_1000hz.mp3') %>",
+      "<%= asset_url ('tone_1050hz.mp3') %>",
+      "<%= asset_url ('tone_1100hz.mp3') %>",
+      "<%= asset_url ('tone_1150hz.mp3') %>",
+      "<%= asset_url ('tone_1200hz.mp3') %>",
+      "<%= asset_url ('tone_1250hz.mp3') %>",
+      "<%= asset_url ('tone_1300hz.mp3') %>",
+      "<%= asset_url ('tone_1350hz.mp3') %>",
+      "<%= asset_url ('tone_1400hz.mp3') %>",
+      "<%= asset_url ('tone_1450hz.mp3') %>",
+      "<%= asset_url ('tone_1500hz.mp3') %>",
+      "<%= asset_url ('tone_2000hz.mp3') %>",
+      "<%= asset_url ('tone_2500hz.mp3') %>",
+      "<%= asset_url ('tone_3000hz.mp3') %>",
+      "<%= asset_url ('tone_3500hz.mp3') %>",
+      "<%= asset_url ('tone_4000hz.mp3') %>",
+      "<%= asset_url ('tone_Silence_1ms.wav') %>"]
     bufferLoader = new BufferLoader(context, tones, @finishedLoading)
     bufferLoader.load()
 
@@ -91,6 +91,3 @@ class window.Audio
 
   @startSound: (buffer, time) ->
     @startSound_Center(buffer, time)
-
-
-
