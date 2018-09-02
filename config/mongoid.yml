@@ -1,23 +1,16 @@
 development:
+  # Configure available database sessions. (required)
   sessions:
+    # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGODB_URI']  %>
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: metronome_development
+      # Provides the hosts the default session can connect to. Must be an array
+      # of host:port pairs. (required)
+      hosts:
+        - localhost:27017
       options:
-        skip_version_check: true
-        safe: true
-# development:
-#   sessions:
-#     default:
-#       # uri: mongodb://root:root123@ds133642.mlab.com:33642/metronome_development
-#       database: metronome_development
-#       hosts:
-#         - ds133642.mlab.com:33642
-#       options:
-#         user: root
-#         password: root123
-#         roles:
-#           - 'dbOwner'
-#           - 'admin'
         # Change whether the session persists in safe mode by default.
         # (default: false)
         # safe: false
@@ -35,7 +28,7 @@ development:
         # operation on failure. (default: 1)
         # retry_interval: 1
   # Configure Mongoid specific options. (optional)
-
+  options:
     # Configuration for whether or not to allow access to fields that do
     # not have a field definition on the model. (default: true)
     # allow_dynamic_fields: true
@@ -76,7 +69,7 @@ development:
 test:
   sessions:
     default:
-      database: metronome_rails_mongo_test
+      database: metronome_test
       hosts:
         - localhost:27017
       options:
@@ -86,9 +79,15 @@ test:
         max_retries: 1
         retry_interval: 0
 production:
+  # Configure available database sessions. (required)
   sessions:
+    # Defines the default session. (required)
     default:
-      uri: <%= ENV['MONGODB_URI']  %>
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: metronome_production
+      # Provides the hosts the default session can connect to. Must be an array
+      # of host:port pairs. (required)
+      hosts:
+        - localhost:27017
       options:
-        skip_version_check: true
-        safe: true
