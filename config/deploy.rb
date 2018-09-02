@@ -25,7 +25,6 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'deploy:update_cron'
 end
 
 namespace :deploy do
