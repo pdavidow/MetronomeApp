@@ -1,5 +1,4 @@
 Tested on Chrome browser.  Uses HTML5 audio.
-HOSTED http://metronome-app.herokuapp.com
 
 This is music practice software geared towards the piano.  At the heart of it is a specialized metronome tied to a piece of piano music.  The piece is modeled as a series of measures each of which contain beats.  A beat is modeled as two numbers: the amount of evenly-spaced notes for the right hand, and same for left.
 
