@@ -27,6 +27,7 @@ gem 'devise'
 gem 'gon', '3.0.5'
 gem 'rails_12factor', group: :production   ### HEROKU
 gem 'unicorn'
+gem 'rails_12factor', group: :production
 group :development, :test do
   gem 'jasminerice'
 
